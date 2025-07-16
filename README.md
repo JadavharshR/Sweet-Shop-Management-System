@@ -15,5 +15,15 @@ A simple and interactive Sweet Shop web application built using HTML, CSS, and J
 - Beautiful and responsive UI with card-based layout
 
 ## Project Structure
-
+Sweet-Shop-Management-System/
+│
+├── index.html # Main webpage structure
+├── style.css # All styling for layout and sweet cards
+├── script.js # UI interaction logic (DOM rendering, events, etc.)
+│
+├── logic.js # Core logic functions (add, delete, search, etc.)
+├── sweet.test.js # Unit tests for logic.js using a testing framework (like Jest)
+│
+├── README.md # Project documentation (this file)
+└── package.json # (Optional) NPM file for test dependencies like Jest
 

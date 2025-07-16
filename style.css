@@ -30,7 +30,7 @@ form button {
   border-radius: 5px;
 }
 
-##filterContainer {
+#filterContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -92,15 +92,15 @@ form button {
 }
 
 .card-buttons button:nth-child(1) {
-  background-color: #28a745; /* Purchase */
+  background-color: #28a745; 
 }
 
 .card-buttons button:nth-child(2) {
-  background-color: #007bff; /* Restore */
+  background-color: #007bff; 
 }
 
 .card-buttons button:nth-child(3) {
-  background-color: #dc3545; /* Delete - always last */
+  background-color: #dc3545; 
 }
 
 .card-buttons button:hover {

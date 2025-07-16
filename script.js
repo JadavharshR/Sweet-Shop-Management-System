@@ -1,4 +1,8 @@
-let sweets = [];
+let sweets = [
+  { id: "S001", name: "Kaju Katli", category: "Diamond", price: 250, quantity: 20 },
+  { id: "S002", name: "Gulab Jamun", category: "Round", price: 150, quantity: 30 },
+  { id: "S003", name: "Rasgulla", category: "Syrupy", price: 180, quantity: 25 },
+];
 let filteredSweets = null;
 
 function renderTable(filteredSweets = sweets) {
@@ -62,4 +66,4 @@ document.getElementById("searchInput").addEventListener("input", function () {
 
 document.getElementById("sweetForm").addEventListener("submit", addSweet);
 
-
+renderTable();

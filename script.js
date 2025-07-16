@@ -1,4 +1,5 @@
 let sweets = [];
+let filteredSweets = null;
 
 function renderTable(filteredSweets = sweets) {
   const tbody = document.querySelector("#sweetTable tbody");
@@ -45,6 +46,19 @@ function deleteSweet(index) {
     renderTable();
   }
 }
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  const searchTerm = this.value.toLowerCase();
+
+  const filtered = sweets.filter(
+    (sweet) =>
+      sweet.name.toLowerCase().includes(searchTerm) ||
+      sweet.category.toLowerCase().includes(searchTerm)
+  );
+
+  renderTable(filtered);
+});
+
 
 document.getElementById("sweetForm").addEventListener("submit", addSweet);
 

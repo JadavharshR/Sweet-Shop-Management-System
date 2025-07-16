@@ -14,7 +14,8 @@ body {
   box-shadow: 0 0 10px #ccc;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
 }
 
@@ -31,8 +32,6 @@ input {
   flex: 1 1 150px;
 }
 
-
-
 button {
   padding: 8px 16px;
   background: #ff9800;
@@ -47,8 +46,17 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
+  text-align: center;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }

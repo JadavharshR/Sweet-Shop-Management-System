@@ -62,13 +62,24 @@ function deleteSweet(index) {
 }
 
 function purchaseSweet(index) {
-  if (sweets[index].quantity > 0) {
-    sweets[index].quantity -= 1;
-    renderCards();
-  } else {
-    alert("This sweet is out of stock!");
+  const availableQty = sweets[index].quantity;
+  const amount = prompt(`Enter quantity to purchase (Available: ${availableQty}):`);
+  const num = parseInt(amount);
+
+  if (isNaN(num) || num <= 0) {
+    alert("Invalid quantity!");
+    return;
   }
+
+  if (num > availableQty) {
+    alert("Not enough stock available!");
+    return;
+  }
+
+  sweets[index].quantity -= num;
+  renderCards();
 }
+
 
 function restoreSweet(index) {
   const amount = prompt("Enter quantity to restore:");

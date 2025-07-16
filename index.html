@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sweet Shop Management</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sweet Shop</h1>
+
+      <form id="sweetForm">
+        <input type="text" id="id" placeholder="ID"  required />
+        <input type="text" id="name" placeholder="Sweet Name" required />
+        <input type="text" id="category" placeholder="Category" required />
+        <input type="number" id="price" placeholder="Price" required />
+        <input type="number" id="quantity" placeholder="Quantity" required />
+        <button type="submit">Add Sweet</button>
+      </form>
+
+      <h2>Available Sweets</h2>
+     
+
+      <table id="sweetTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="text.js"></script>
+  </body>
+</html>

@@ -20,5 +20,14 @@ describe('Sweet Shop Logic Tests', () => {
     expect(sweets.length).toBe(0);
   });
 
+test('Search Sweet by Name or Category', () => {
+    sweets = [
+      { id: '1', name: 'Ladoo', category: 'Round', price: 10, quantity: 5 },
+      { id: '2', name: 'Barfi', category: 'Square', price: 20, quantity: 2 }
+    ];
+    const result = searchSweets(sweets, 'round');
+    expect(result.length).toBe(1);
+    expect(result[0].name).toBe('Ladoo');
+  });
   
 });

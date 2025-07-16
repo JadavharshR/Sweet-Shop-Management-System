@@ -1,31 +1,34 @@
 let sweets = [
-  { id: "S001", name: "Kaju Katli", category: "Diamond", price: 250, quantity: 20 },
-  { id: "S002", name: "Gulab Jamun", category: "Round", price: 150, quantity: 30 },
-  { id: "S003", name: "Rasgulla", category: "Syrupy", price: 180, quantity: 25 },
+  { id: "S001", name: "Kesar Kaju Katli", category: "Premium Diamond", price: 280, quantity: 15 },
+  { id: "S002", name: "Golden Gulab Jamun", category: "Royal Round", price: 160, quantity: 20 },
+  { id: "S003", name: "Bengali Rasgulla", category: "Syrupy Delight", price: 170, quantity: 25 },
+  { id: "S004", name: "Chocolate Barfi", category: "Fusion", price: 200, quantity: 18 },
+  { id: "S005", name: "Pista Roll", category: "Dry Fruit", price: 220, quantity: 22 },
+  { id: "S006", name: "Motichoor Ladoo", category: "Classic", price: 150, quantity: 30 }
 ];
 
-function renderTable(filteredSweets = sweets) {
-  const tbody = document.querySelector("#sweetTable tbody");
-  tbody.innerHTML = "";
+function renderCards(filteredSweets = sweets) {
+  const container = document.getElementById("sweetCards");
+  container.innerHTML = "";
 
   if (filteredSweets.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6">No such sweet available in the shop.</td></tr>`;
+    container.innerHTML = `<p>No sweets found.</p>`;
     return;
   }
 
   filteredSweets.forEach((sweet, index) => {
-    const row = `<tr>
-      <td>${sweet.id}</td>
-      <td>${sweet.name}</td>
-      <td>${sweet.category}</td>
-      <td>${sweet.price}</td>
-      <td>${sweet.quantity}</td>
-      <td>
-        <button onclick="purchaseSweet(${index})">Purchase</button>
-        <button onclick="deleteSweet(${index})">Delete</button>
-      </td>
-    </tr>`;
-    tbody.innerHTML += row;
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${sweet.name}</h3>
+      <p><strong>ID:</strong> ${sweet.id}</p>
+      <p><strong>Category:</strong> ${sweet.category}</p>
+      <p><strong>Price:</strong> ₹${sweet.price}</p>
+      <p><strong>Qty:</strong> ${sweet.quantity}</p>
+      <button class="purchase" onclick="purchaseSweet(${index})">Purchase</button>
+      <button class="delete" onclick="deleteSweet(${index})">Delete</button>
+    `;
+    container.appendChild(card);
   });
 }
 
@@ -40,21 +43,21 @@ function addSweet(e) {
 
   const sweet = { id, name, category, price, quantity };
   sweets.push(sweet);
-  renderTable();
+  renderCards();
   document.getElementById("sweetForm").reset();
 }
 
 function deleteSweet(index) {
   if (confirm("Are you sure you want to delete this sweet?")) {
     sweets.splice(index, 1);
-    renderTable();
+    renderCards();
   }
 }
 
 function purchaseSweet(index) {
   if (sweets[index].quantity > 0) {
     sweets[index].quantity -= 1;
-    renderTable();
+    renderCards();
   } else {
     alert("This sweet is out of stock!");
   }
@@ -67,8 +70,8 @@ function applyFilters() {
   const maxPrice = parseFloat(document.getElementById("maxPrice").value);
 
   const filtered = sweets.filter((sweet) => {
-    const matchName = name === "" || sweet.name.toLowerCase().includes(name);
-    const matchCategory = category === "" || sweet.category.toLowerCase().includes(category);
+    const matchName = !name || sweet.name.toLowerCase().includes(name);
+    const matchCategory = !category || sweet.category.toLowerCase().includes(category);
     const matchPrice =
       (isNaN(minPrice) || sweet.price >= minPrice) &&
       (isNaN(maxPrice) || sweet.price <= maxPrice);
@@ -76,7 +79,7 @@ function applyFilters() {
     return matchName && matchCategory && matchPrice;
   });
 
-  renderTable(filtered);
+  renderCards(filtered);
 }
 
 function resetFilters() {
@@ -84,10 +87,10 @@ function resetFilters() {
   document.getElementById("searchCategory").value = "";
   document.getElementById("minPrice").value = "";
   document.getElementById("maxPrice").value = "";
-  renderTable();
+  renderCards();
 }
 
 document.getElementById("sweetForm").addEventListener("submit", addSweet);
 
-// Initial table rendering
-renderTable();
+// Initial render
+renderCards();

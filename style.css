@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
   background: white;
   padding: 20px;
@@ -15,65 +15,105 @@ body {
 
 form {
   display: flex;
-  flex-wrap: nowrap;        /* Keep everything in a single line */
+  flex-wrap: wrap;
   gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  overflow-x: auto;         /* Allow horizontal scroll on smaller screens */
+  margin-bottom: 20px;
 }
 
 form input,
 form button {
-  flex: 1 1 auto;
+  flex: 1;
   min-width: 120px;
   padding: 8px;
-  box-sizing: border-box;
 }
-
 
 #filterContainer {
   display: flex;
-  flex-wrap: nowrap;            /* Keep inputs in one line */
+  flex-wrap: wrap;
   gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  overflow-x: auto;             /* Allow scroll if screen is too small */
-  margin: 10px 0 20px;
+  margin-bottom: 20px;
 }
 
 #filterContainer input,
 #filterContainer button {
-  flex: 1 1 auto;
+  flex: 1;
   min-width: 120px;
   padding: 8px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px);
   box-sizing: border-box;
+  background-color: #fff8e1;
+  border: 1px solid #ffcc80;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+.card:hover {
+  transform: translateY(-5px);
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #6d4c41; /* Chocolate brown */
+  text-transform: capitalize;
   text-align: center;
+  transition: 0.3s ease;
+  border-bottom: 2px dashed #d7ccc8;
+  padding-bottom: 4px;
 }
 
-button {
-  padding: 6px 12px;
-  cursor: pointer;
-  margin: 2px;
+.card h3:hover {
+  color: #3e2723;
+  letter-spacing: 1px;
+  cursor: default;
+}
+
+.card p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.card button {
+  margin-right: 8px;
+  padding: 6px 10px;
   border: none;
-  background-color: #007bff;
-  color: white;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.card .purchase {
+  background-color: #28a745;
+  color: white;
+}
+
+.card .delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%;
+  }
 }

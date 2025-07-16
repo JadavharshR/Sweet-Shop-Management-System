@@ -42,7 +42,6 @@ function addSweet(e) {
   sweets.push(sweet);
   renderTable();
   document.getElementById("sweetForm").reset();
-  document.getElementById("searchInput").value = "";
 }
 
 function deleteSweet(index) {
@@ -61,18 +60,34 @@ function purchaseSweet(index) {
   }
 }
 
-document.getElementById("searchInput").addEventListener("input", function () {
-  const searchTerm = this.value.toLowerCase();
+function applyFilters() {
+  const name = document.getElementById("searchName").value.toLowerCase();
+  const category = document.getElementById("searchCategory").value.toLowerCase();
+  const minPrice = parseFloat(document.getElementById("minPrice").value);
+  const maxPrice = parseFloat(document.getElementById("maxPrice").value);
 
-  const filtered = sweets.filter(
-    (sweet) =>
-      sweet.name.toLowerCase().includes(searchTerm) ||
-      sweet.category.toLowerCase().includes(searchTerm)
-  );
+  const filtered = sweets.filter((sweet) => {
+    const matchName = name === "" || sweet.name.toLowerCase().includes(name);
+    const matchCategory = category === "" || sweet.category.toLowerCase().includes(category);
+    const matchPrice =
+      (isNaN(minPrice) || sweet.price >= minPrice) &&
+      (isNaN(maxPrice) || sweet.price <= maxPrice);
+
+    return matchName && matchCategory && matchPrice;
+  });
 
   renderTable(filtered);
-});
+}
+
+function resetFilters() {
+  document.getElementById("searchName").value = "";
+  document.getElementById("searchCategory").value = "";
+  document.getElementById("minPrice").value = "";
+  document.getElementById("maxPrice").value = "";
+  renderTable();
+}
 
 document.getElementById("sweetForm").addEventListener("submit", addSweet);
 
+// Initial table rendering
 renderTable();

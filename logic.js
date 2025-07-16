@@ -6,12 +6,16 @@ function deleteSweet(sweets, index) {
   sweets.splice(index, 1);
 }
 
-function searchSweets(sweets, term) {
-  const lower = term.toLowerCase();
-  return sweets.filter(s =>
-    s.name.toLowerCase().includes(lower) ||
-    s.category.toLowerCase().includes(lower)
-  );
+function searchSweets(sweets, name = "", category = "", minPrice = 0, maxPrice = Infinity) {
+  const lowerName = name.toLowerCase();
+  const lowerCategory = category.toLowerCase();
+
+  return sweets.filter(s => {
+    const matchesName = lowerName === "" || s.name.toLowerCase().includes(lowerName);
+    const matchesCategory = lowerCategory === "" || s.category.toLowerCase().includes(lowerCategory);
+    const matchesPrice = s.price >= minPrice && s.price <= maxPrice;
+    return matchesName && matchesCategory && matchesPrice;
+  });
 }
 
 function purchaseSweet(sweets, index) {
@@ -23,4 +27,9 @@ function purchaseSweet(sweets, index) {
   }
 }
 
-module.exports = { addSweet, deleteSweet, searchSweets, purchaseSweet };
+module.exports = {
+  addSweet,
+  deleteSweet,
+  searchSweets,
+  purchaseSweet
+};

@@ -18,11 +18,15 @@
       <button type="submit">Add Sweet</button>
     </form>
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search by name or category..."
-    />
+    <h2>Search Sweets</h2>
+    <div id="filterContainer">
+      <input type="text" id="searchName" placeholder="Search by Name" />
+      <input type="text" id="searchCategory" placeholder="Search by Category" />
+      <input type="number" id="minPrice" placeholder="Min Price" />
+      <input type="number" id="maxPrice" placeholder="Max Price" />
+      <button onclick="applyFilters()">Search</button>
+      <button onclick="resetFilters()">Reset</button>
+    </div>
 
     <h2>Available Sweets</h2>
 

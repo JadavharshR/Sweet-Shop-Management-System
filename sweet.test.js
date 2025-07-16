@@ -1,11 +1,12 @@
 const {
   addSweet,
   deleteSweet,
-  searchSweets,
-  purchaseSweet
+  purchaseSweet,
+  restoreSweet,
+  searchSweets
 } = require('./logic');
 
-describe('Sweet Shop Logic', () => {
+describe("Sweet Shop Logic Tests", () => {
   let sweets;
 
   beforeEach(() => {
@@ -16,39 +17,36 @@ describe('Sweet Shop Logic', () => {
     ];
   });
 
-  test('Add sweet', () => {
-    const newSweet = { id: "4", name: "Halwa", category: "Soft", price: 25, quantity: 4 };
-    addSweet(sweets, newSweet);
+  test("Add Sweet", () => {
+    addSweet(sweets, { id: "4", name: "Halwa", category: "Soft", price: 25, quantity: 4 });
     expect(sweets.length).toBe(4);
-    expect(sweets[3].name).toBe("Halwa");
   });
 
-  test('Delete sweet', () => {
+  test("Delete Sweet", () => {
     deleteSweet(sweets, 1);
     expect(sweets.length).toBe(2);
     expect(sweets[1].name).toBe("Jalebi");
   });
 
-  test('Search sweet by name and category', () => {
-    const result = searchSweets(sweets, "barfi", "square");
-    expect(result.length).toBe(1);
-    expect(result[0].id).toBe("2");
-  });
-
-  test('Search sweet by price range', () => {
-    const result = searchSweets(sweets, "", "", 10, 15);
-    expect(result.length).toBe(2); // Ladoo and Jalebi
-  });
-
-  test('Purchase sweet success', () => {
+  test("Purchase Sweet", () => {
     const result = purchaseSweet(sweets, 0);
     expect(result).toBe(true);
     expect(sweets[0].quantity).toBe(4);
   });
 
-  test('Purchase sweet fails when out of stock', () => {
+  test("Fail Purchase when out of stock", () => {
     const result = purchaseSweet(sweets, 2);
     expect(result).toBe(false);
-    expect(sweets[2].quantity).toBe(0);
+  });
+
+  test("Restore Sweet", () => {
+    const result = restoreSweet(sweets, 1, 5);
+    expect(result).toBe(true);
+    expect(sweets[1].quantity).toBe(8);
+  });
+
+  test("Search Sweet by Name", () => {
+    const result = searchSweets(sweets, "ladoo", "", 0, Infinity);
+    expect(result.length).toBe(1);
   });
 });

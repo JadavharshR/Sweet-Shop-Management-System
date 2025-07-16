@@ -14,7 +14,13 @@ function searchSweets(sweets, term) {
   );
 }
 
+function purchaseSweet(sweets, index) {
+  if (sweets[index].quantity > 0) {
+    sweets[index].quantity -= 1;
+    return true; // success
+  } else {
+    return false; // out of stock
+  }
+}
 
-
-
-module.exports = { addSweet, deleteSweet , searchSweets };
+module.exports = { addSweet, deleteSweet, searchSweets, purchaseSweet };

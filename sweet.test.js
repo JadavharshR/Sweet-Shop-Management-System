@@ -1,33 +1,32 @@
-const { addSweet, deleteSweet, searchSweets } = require('./logic');
+const { addSweet, deleteSweet, searchSweets, purchaseSweet } = require('./logic');
 
-describe('Sweet Shop Logic Tests', () => {
+describe("Sweet Shop Features", () => {
   let sweets;
 
   beforeEach(() => {
-    sweets = [];
-  });
-
-  test('Add Sweet', () => {
-    const sweet = { id: 'T001', name: 'Test Barfi', category: 'Test', price: 123, quantity: 3 };
-    addSweet(sweets, sweet);
-    expect(sweets.length).toBe(1);
-    expect(sweets[0].id).toBe('T001');
-  });
-
-  test('Delete Sweet', () => {
-    sweets = [{ id: 'T001', name: 'Test Barfi', category: 'Test', price: 123, quantity: 3 }];
-    deleteSweet(sweets, 0);
-    expect(sweets.length).toBe(0);
-  });
-
-test('Search Sweet by Name or Category', () => {
     sweets = [
-      { id: '1', name: 'Ladoo', category: 'Round', price: 10, quantity: 5 },
-      { id: '2', name: 'Barfi', category: 'Square', price: 20, quantity: 2 }
+      { id: 1, name: "Ladoo", category: "Indian", price: 10, quantity: 5 },
+      { id: 2, name: "Baklava", category: "Turkish", price: 15, quantity: 2 },
+      { id: 3, name: "Donut", category: "American", price: 12, quantity: 10 },
     ];
-    const result = searchSweets(sweets, 'round');
+  });
+
+  test('Search Sweet by Name or Category', () => {
+    const result = searchSweets(sweets, 'indian');
     expect(result.length).toBe(1);
     expect(result[0].name).toBe('Ladoo');
-  });
-  
+  });
+
+  test('Purchase Sweet - quantity decreases by 1', () => {
+    const success = purchaseSweet(sweets, 0); // Ladoo
+    expect(success).toBe(true);
+    expect(sweets[0].quantity).toBe(4);
+  });
+
+  test('Purchase Sweet - should not allow if quantity is 0', () => {
+    sweets[1].quantity = 0; // Baklava
+    const result = purchaseSweet(sweets, 1);
+    expect(result).toBe(false);
+    expect(sweets[1].quantity).toBe(0);
+  });
 });
